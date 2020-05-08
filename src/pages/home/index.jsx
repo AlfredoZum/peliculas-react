@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderHome, ListMovieHome, ListTrailersHome, InformativeSection } from './components/index';
+import { getPopular } from '../../services/index.jsx';
 
 export default class HomePage extends Component {
 
@@ -24,11 +25,45 @@ export default class HomePage extends Component {
                     img : 'https://image.tmdb.org/t/p/w220_and_h330_face/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg'
                 }
             ],
+            moviesPopular : {
+                result: [],
+                isReady: false,
+                hasError : false,
+                error : null,
+                page: 1
+            },
             indexPopular : 0,
             indexFree : 0,
             indexTrailer: 0
         }
     };
+
+    componentDidMount = async () => {
+        this.getMoviesPopular();
+    };
+
+    getMoviesPopular = async () => {
+        const data = await getPopular( 'streaming' );
+        if (!data.hasError) {
+            this.setState({
+                moviesPopular: {
+                    result : data.results,
+                    isReady: true,
+                    hasError : false,
+                    error : null,
+                    page: data.page
+                }
+            });
+        } else {
+            this.setState({
+                hasError: true,
+                error: data.error,
+                result: [],
+                isReady: false,
+                page: this.state.moviesPopular.page
+            });
+        };
+    }
 
     changeGallery = async ( index , title) => {
         switch (title) {
@@ -46,7 +81,7 @@ export default class HomePage extends Component {
 
     render(){
 
-        const { movies, trailers } = this.state;
+        const { movies, trailers, moviesPopular } = this.state;
         const { indexPopular, indexFree, indexTrailer } = this.state;
 
         //, "In Theaters" add to btns popular
@@ -58,13 +93,13 @@ export default class HomePage extends Component {
                     <ListMovieHome 
                         title = {'popular'}
                         name={"What's Popular"} 
-                        movies = { movies }
+                        movies = { moviesPopular.result }
                         btns={ [ "Streaming", "On TV", "For Rent" ]}
                         index = { indexPopular }
                         onCallback = { this.changeGallery }
 
                     />
-                    <ListMovieHome 
+                    {/*<ListMovieHome 
                         title = {'free'}
                         name={"Free To Watch"} 
                         movies = { movies }
@@ -80,7 +115,7 @@ export default class HomePage extends Component {
                         btns={ [ 'Streaming', 'On Tv', 'For Rent',  ]}
                         index = { indexTrailer }
                         onCallback = { this.changeGallery }
-                    />
+                    />*/}
                     <InformativeSection />
                 </div>
             </>

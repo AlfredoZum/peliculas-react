@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CardMovieHome from './card_movie_home.jsx';
+import { PATH_IMG } from '../../../consts/index.jsx';
+import moment from 'moment';
 
 const ListMovieHome = ( props ) => (
     <>
@@ -27,26 +28,46 @@ const ListMovieHome = ( props ) => (
             </div>
             <div className="flex flex-row  text-black mt-8 pb-4 overflow-auto" >
                 {
-                    Array.apply(0, Array(10)).map( (movie, index) => (
-                        <Link key={ /*props.movies[0].id*/ index } to="/" >
-                            <CardMovieHome 
-                                movie = { props.movies[0] }
-                            />
-                        </Link>
-                        
-                    ))
-                    /*props.movies.map( (movie) => (
+                    
+                    
+                    props.movies.map( (movie) => (
                         <Link key={ movie.id } to="/" >
                             <CardMovieHome 
                                 movie = { movie }
                             />
                         </Link>
-                        
-                    ))*/
+                    ))
                 }
             </div>
         </div>
     </>
 );
 
+const CardMovieHome = ( props ) => (
+    <>
+        <div className=" w-1/3 md:w-40 mx-4" style={ { minWidth: '135px', } } >  
+            <img 
+                a={ console.log( `${PATH_IMG}${props.movie.poster_path}` ) }
+                src={ `${PATH_IMG}${props.movie.poster_path}` } 
+                alt="props.movie.title" 
+                className="rounded-lg mb-6"
+            />
+            <div className="relative bg-red-900 relative w-full h-auto" >
+                <div 
+                    className="absolute rounded-full h-10 w-10 flex items-center justify-center bg-gray-900 text-white" 
+                    style={ { top: '-44px', left: '10px', padding: '0.15rem' } }
+                >
+                    <div className="flex items-center justify-center rounded-full h-full w-full border-2 border-indigo-900" >
+                        <p style={{ fontSize: '11px' }} >{props.movie.vote_average * 10}</p>
+                        <label style={{ fontSize: '6px' }} >%</label>
+                    </div>
+                </div>
+            </div>
+            <p className="font-bold" >{ props.movie.title }</p>
+            <p className="font-hairline text-gray-700 text-sm" > { moment( props.movie.release_date ).format('MMM DD, YYYY') }</p>
+        </div>
+    </>
+);
+
 export default ListMovieHome;
+                
