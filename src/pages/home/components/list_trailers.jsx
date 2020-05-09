@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import bgImg from '../../../assets/banner_forma_agua.jpg';
+import { PATH_IMG } from '../../../consts/index.jsx';
 
 const btnPlay = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-175-play-806cb05551791b8dedd7f8d38fd3bd806e2d397fcfeaa00a5cc9129f0819fd07.svg";
 
@@ -18,7 +19,7 @@ const ListTrailersHome = ( props ) => (
                                     ${index === props.index && 'bg-white' } 
                                     ${index === props.index ? 'text-indigo-900' : 'text-white'} 
                                     rounded-full py-1 px-4 text-sm ease-linear duration-500`}
-                                onClick={ () => props.onCallback( index, props.title ) }
+                                onClick={ () => props.onCallback( index, props.title, name ) }
                             >
                                 { name }
                             </button>
@@ -29,13 +30,13 @@ const ListTrailersHome = ( props ) => (
             </div>
             <div className="flex flex-row  text-black mt-8 pb-4 overflow-auto pb-8" >
             {
-                Array.apply(0, Array(10)).map( (trailer, index) => (
-                    <Link key={ /*props.trailers[0].id*/ index } to="/" >
+                props.trailers.map( (trailer) => (
+                    trailer.backdrop_path && 
+                    <Link key={ trailer.id } to="/" >
                         <CardTrailers 
-                            trailer = { props.trailers[0] }
+                            trailer = { trailer }
                         />
                     </Link>
-                    
                 ))
             }
             </div>
@@ -48,13 +49,13 @@ const CardTrailers = ( props ) => (
         <div className=" w-1/3 md:w-64 mx-4 text-white text-center" style={ { minWidth: '250px', } } >  
             <div className="relative" >
                 <img 
-                    src={ props.trailer.img } 
+                    src={ `${PATH_IMG}${props.trailer.backdrop_path}` } 
                     alt="props.movie.title" 
                     className="rounded-lg mb-6 focus:scale-150"
                 />
             </div>
             <p className="font-medium text-lg" >{ props.trailer.title }</p>
-            <p className="font-thin text-sm focus:shadow-outline" > { props.trailer.description }</p>
+            <p className="font-thin text-sm focus:shadow-outline truncate" > { props.trailer.overview }</p>
         </div>
     </>
 ); 

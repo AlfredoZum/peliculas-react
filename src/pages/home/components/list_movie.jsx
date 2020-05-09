@@ -17,7 +17,7 @@ const ListMovieHome = ( props ) => (
                                     ${index === props.index ? "bg-indigo-900" : ""} 
                                     ${index === props.index ? "text-white" : "text-indigo-900"} 
                                     rounded-full py-1 px-4 text-sm ease-linear duration-500`}
-                                onClick={ () => props.onCallback( index, props.title ) }
+                                onClick={ () => props.onCallback( index, props.title, name ) }
                             >
                                 { name }
                             </button>
@@ -27,9 +27,7 @@ const ListMovieHome = ( props ) => (
                 </div>
             </div>
             <div className="flex flex-row  text-black mt-8 pb-4 overflow-auto" >
-                {
-                    
-                    
+                {                    
                     props.movies.map( (movie) => (
                         <Link key={ movie.id } to="/" >
                             <CardMovieHome 
@@ -47,7 +45,6 @@ const CardMovieHome = ( props ) => (
     <>
         <div className=" w-1/3 md:w-40 mx-4" style={ { minWidth: '135px', } } >  
             <img 
-                a={ console.log( `${PATH_IMG}${props.movie.poster_path}` ) }
                 src={ `${PATH_IMG}${props.movie.poster_path}` } 
                 alt="props.movie.title" 
                 className="rounded-lg mb-6"
