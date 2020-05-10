@@ -133,15 +133,42 @@ export default class HomePage extends Component {
         switch (title) {
             case 'free':
                 this.getMoviesFree( name, 1);
-                this.setState({ indexFree : index });
+                this.setState({ 
+                    indexFree : index,
+                    moviesFree : {
+                        result: [],
+                        isReady: false,
+                        hasError : false,
+                        error : null,
+                        page: 0
+                    },
+                 });
                 break;
             case 'latestTrailers':
                 this.getmoviesLatestTrailers( name, 1);
-                this.setState({ indexTrailer : index });
+                this.setState({ 
+                    indexTrailer : index,
+                    moviesLatestTrailers : {
+                        result: [],
+                        isReady: false,
+                        hasError : false,
+                        error : null,
+                        page: 0
+                    },
+                });
                 break;
             default:
                 this.getMoviesPopular( name, 1);
-                this.setState({ indexPopular : index });
+                this.setState({ 
+                    indexPopular : index,
+                    moviesPopular : {
+                        result: [],
+                        isReady: false,
+                        hasError : false,
+                        error : null,
+                        page: 0
+                    },
+                });
                 break;
         }
     };
@@ -161,6 +188,7 @@ export default class HomePage extends Component {
                         title = {'popular'}
                         name={"What's Popular"} 
                         movies = { moviesPopular.result }
+                        isReady = { moviesPopular.isReady }
                         btns={ [ "Streaming", "On TV", "For Rent" ]}
                         index = { indexPopular }
                         onCallback = { this.changeGallery }
@@ -170,6 +198,7 @@ export default class HomePage extends Component {
                         title = {'free'}
                         name={"Free To Watch"} 
                         movies = { moviesFree.result  }
+                        isReady = { moviesFree.isReady }
                         btns={ [ "Movies", "TV" ]}
                         index = { indexFree }
                         onCallback = { this.changeGallery }
@@ -179,6 +208,7 @@ export default class HomePage extends Component {
                         title = {'latestTrailers'}
                         name={"Latest Trailers"} 
                         trailers = { moviesLatestTrailers.result }
+                        isReady = { moviesLatestTrailers.isReady }
                         btns={ [ 'Streaming', 'On Tv', 'For Rent',  ]}
                         index = { indexTrailer }
                         onCallback = { this.changeGallery }

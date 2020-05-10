@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import bgImg from '../../../assets/banner_forma_agua.jpg';
 import { PATH_IMG } from '../../../consts/index.jsx';
+import ImgDefault from '../../../assets/default-trailer.jpg';
 
-const btnPlay = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-175-play-806cb05551791b8dedd7f8d38fd3bd806e2d397fcfeaa00a5cc9129f0819fd07.svg";
+//const btnPlay = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-175-play-806cb05551791b8dedd7f8d38fd3bd806e2d397fcfeaa00a5cc9129f0819fd07.svg";
 
 const ListTrailersHome = ( props ) => (
     <>
@@ -30,13 +31,16 @@ const ListTrailersHome = ( props ) => (
             </div>
             <div className="flex flex-row  text-black mt-8 pb-4 overflow-auto pb-8" >
             {
-                props.trailers.map( (trailer) => (
+                 props.isReady ? props.trailers.map( (trailer) => (
                     trailer.backdrop_path && 
                     <Link key={ trailer.id } to="/" >
                         <CardTrailers 
                             trailer = { trailer }
                         />
                     </Link>
+                ))
+                : Array.apply(0, Array(10)).map( (movie, index) => (
+                    <LoadingTrailer/>
                 ))
             }
             </div>
@@ -59,5 +63,17 @@ const CardTrailers = ( props ) => (
         </div>
     </>
 ); 
+
+const LoadingTrailer = ( ) => (
+    <div className=" w-1/3 md:w-64 mx-4 text-white text-center" style={ { minWidth: '250px', } } >  
+            <div className="relative" >
+                <img 
+                    src={ ImgDefault } 
+                    alt="props.movie.title" 
+                    className="rounded-lg mb-6 focus:scale-150"
+                />
+            </div>
+    </div>
+);
 
 export default ListTrailersHome;

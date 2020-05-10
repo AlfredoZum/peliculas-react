@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PATH_IMG } from '../../../consts/index.jsx';
 import moment from 'moment';
+import ImgDefault from '../../../assets/default-movie.jpg';
 
 const ListMovieHome = ( props ) => (
     <>
@@ -27,19 +28,23 @@ const ListMovieHome = ( props ) => (
                 </div>
             </div>
             <div className="flex flex-row  text-black mt-8 pb-4 overflow-auto" >
-                {                    
-                    props.movies.map( (movie) => (
+                {             
+                    props.isReady ? props.movies.map( (movie) => (
                         <Link key={ movie.id } to="/" >
                             <CardMovieHome 
                                 movie = { movie }
                             />
                         </Link>
+                    )) : Array.apply(0, Array(10)).map( (movie, index) => (
+                        <LoadingMovie/>
                     ))
                 }
             </div>
         </div>
     </>
 );
+
+//default-trailer.jpg
 
 const CardMovieHome = ( props ) => (
     <>
@@ -62,6 +67,26 @@ const CardMovieHome = ( props ) => (
             </div>
             <p className="font-bold" >{ props.movie.title }</p>
             <p className="font-hairline text-gray-700 text-sm" > { moment( props.movie.release_date ).format('MMM DD, YYYY') }</p>
+        </div>
+    </>
+);
+
+const LoadingMovie = () => (
+    <>
+        <div className=" w-1/3 md:w-40 mx-4" style={ { minWidth: '135px', } } >  
+            <img 
+                src={ ImgDefault } 
+                alt="props.movie.title" 
+                className="rounded-lg mb-6"
+            />
+            <div className="relative bg-red-900 relative w-full h-auto" >
+                <div 
+                    className="absolute rounded-full h-10 w-10 flex items-center justify-center bg-gray-900 text-white" 
+                    style={ { top: '-44px', left: '10px', padding: '0.15rem' } }
+                >
+                </div>
+            </div>
+            
         </div>
     </>
 );
