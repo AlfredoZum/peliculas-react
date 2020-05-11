@@ -1,7 +1,8 @@
-import { getPopular, getLatestTrailers, getFree } from './movies';
+import { getPopular, getLatestTrailers, getFree, getMovieDetail } from './movies';
 
 export {
     getPopular,
     getLatestTrailers,
-    getFree
+    getFree,
+    getMovieDetail
 };

@@ -51,11 +51,11 @@ const ListTrailersHome = ( props ) => (
 const CardTrailers = ( props ) => (
     <>
         <div className=" w-1/3 md:w-64 mx-4 text-white text-center" style={ { minWidth: '250px', } } >  
-            <div className="relative" >
+            <div className="relative transition ease-in duration-700" >
                 <img 
                     src={ `${PATH_IMG}${props.trailer.backdrop_path}` } 
                     alt="props.movie.title" 
-                    className="rounded-lg mb-6 focus:scale-150"
+                    className="rounded-lg mb-6 focus:scale-150 transition ease-in duration-700"
                 />
             </div>
             <p className="font-medium text-lg" >{ props.trailer.title }</p>

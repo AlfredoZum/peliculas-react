@@ -30,7 +30,7 @@ const ListMovieHome = ( props ) => (
             <div className="flex flex-row  text-black mt-8 pb-4 overflow-auto" >
                 {             
                     props.isReady ? props.movies.map( (movie) => (
-                        <Link key={ movie.id } to="/" >
+                        <Link key={ movie.id } to={`/movie/${movie.id}`} >
                             <CardMovieHome 
                                 movie = { movie }
                             />
