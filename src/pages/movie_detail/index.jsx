@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { CardMovie } from './components/index.jsx';
-import { getMovieDetail } from '../../services/index.jsx';
+import { CardMovie, TopCast } from './components/index.jsx';
+import { getMovieDetail, getMovieCredits } from '../../services/index.jsx';
 
 export default class MovieDetailPage extends Component {
 
@@ -10,7 +10,8 @@ export default class MovieDetailPage extends Component {
       result : {},
       isReady: false,
       hasError : false,
-      error : null
+      error : null,
+      credits: {},
     }
   };
 
@@ -18,14 +19,29 @@ export default class MovieDetailPage extends Component {
     try{
       const movieId = this.props.match.params.movieId;
       
-    if( !movieId ){
+      this.getMovieDetail( movieId );
+      this.getMovieCredits( movieId );
+
+    }catch( err ){
+        this.setState({
+            hasError : true,
+            error : `No se encontro identificador de la pelicula: ${err}`
+        });
+    }
+
+  };
+
+  getMovieDetail = async movieId => {
+
+    try{
+
+      if( !movieId ){
         this.setState({
             hasError : true,
             error : 'No se encontro identificador de la pelicula'
         });
-    }else{
+      }else{
         const response = await getMovieDetail( movieId );
-        console.log( response );
         if( !response.hasError ){
             this.setState({
                 result : response,
@@ -34,22 +50,48 @@ export default class MovieDetailPage extends Component {
         }else{
             throw Error( '' );
         }
+      }
+
+    }catch( err ){
+      this.setState({
+        hasError : true,
+        error : `No se encontro identificador de la pelicula: ${err}`
+      });
     }
-    }catch( error ){
+
+  }
+
+  getMovieCredits = async movieId => {
+    try{
+
+      const response = await getMovieCredits( movieId );
+      console.log( response );
+      console.log( "se ha agregado getMovieCredits" );
+      if( !response.hasError ){
         this.setState({
-            hasError : true,
-            error : `No se encontro identificador de la pelicula: ${error}`
+          credits : response
         });
+      }else{
+          throw Error( response.error );
+      }
+
+    }catch( err ){
+      this.setState({
+        credits : {}
+      });
     }
-  };
+  }
 
   render(){
 
-    const { result } = this.state;
+    const { result, credits } = this.state;
 
     return (
       <>
-        <CardMovie result = { result } />
+        <CardMovie result = { result } crew= { credits.crew } />
+        <div className="w-3/4" >
+          <TopCast casts = { credits.cast } />
+        </div>
       </>
     )
   }

@@ -117,6 +117,27 @@ export const getMovieDetail = async ( movieId ) => {
 
         const url = `${API_URL}/movie/${movieId}?${API_KEY}&language=en-US&page=1`;
 
+        console.log( url );
+
+        const response = await axios.get( url );
+        if( response.data ){
+            return response.data;
+        }
+    }catch( error ){
+        return {
+            hasError : true,
+            error
+        }     
+    }
+
+}
+
+export const getMovieCredits = async ( movieId ) => {
+
+    try{
+
+        const url = `${API_URL}/movie/${movieId}/credits?${API_KEY}&language=en-US&page=1`;
+
         const response = await axios.get( url );
         if( response.data ){
             return response.data;
