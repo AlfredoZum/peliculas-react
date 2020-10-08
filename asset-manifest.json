@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.deaac4d1.chunk.css",
+    "main.js": "/static/js/main.aa725614.chunk.js",
+    "main.js.map": "/static/js/main.aa725614.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.22e28c68.js",
+    "runtime-main.js.map": "/static/js/runtime-main.22e28c68.js.map",
+    "static/js/2.56d3c5eb.chunk.js": "/static/js/2.56d3c5eb.chunk.js",
+    "static/js/2.56d3c5eb.chunk.js.map": "/static/js/2.56d3c5eb.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7f64efc5a2128890e5b8455053686220.js": "/precache-manifest.7f64efc5a2128890e5b8455053686220.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.deaac4d1.chunk.css.map": "/static/css/main.deaac4d1.chunk.css.map",
+    "static/js/2.56d3c5eb.chunk.js.LICENSE.txt": "/static/js/2.56d3c5eb.chunk.js.LICENSE.txt",
+    "static/media/banner_forma_agua.jpg": "/static/media/banner_forma_agua.a0e13892.jpg",
+    "static/media/banner_info.jpg": "/static/media/banner_info.703d3e19.jpg",
+    "static/media/banner_whiplash-color.jpg": "/static/media/banner_whiplash-color.8ae0d247.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.22e28c68.js",
+    "static/js/2.56d3c5eb.chunk.js",
+    "static/css/main.deaac4d1.chunk.css",
+    "static/js/main.aa725614.chunk.js"
+  ]
+}
