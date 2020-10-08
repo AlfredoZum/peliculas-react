@@ -11,12 +11,12 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "moment": "^2.25.3",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-moment": "^0.9.7",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.3"
   },
   "scripts": {
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.6",
+    "dotenv": "^8.2.0",
     "postcss-cli": "^7.1.1",
     "tailwindcss": "^1.4.4"
   }

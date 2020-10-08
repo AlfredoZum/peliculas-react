@@ -25,6 +25,8 @@ export const getPopular = async ( type, page ) => {
             break;
         }
 
+        console.log( url, `url` );
+
         const response = await axios.get( url );
         if( response.data ){
             return response.data;
